@@ -3,6 +3,7 @@ from django.shortcuts import render
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.filters import SearchFilter
 
 from .models import Customer, Product, Category, Order, Review
 from .serializers import CustomerSerializer, ProductSerializer, CategorySerializer, OrderSerializer, ReviewSerializer
@@ -11,6 +12,8 @@ from .serializers import CustomerSerializer, ProductSerializer, CategorySerializ
 class ProductListCreateAPIView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    filterset_fields = ['category','seller']
+    search_fields = ['name','description','seller__name','category__name']
     
 class ProductDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
@@ -47,6 +50,7 @@ class OrderDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
 class ReviewListCreateAPIView(generics.ListCreateAPIView):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
+    filter_fields = '__all__'
     
 class ReviewDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Review.objects.all()
