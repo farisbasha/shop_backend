@@ -1,7 +1,8 @@
 
 from rest_framework import serializers
 
-from .models import Customer, Product, Category, Order
+from .models import Customer, Product, Category, Order, ProductTag, Review
+
 
 #Customer Serializer Login
 class CustomerSerializer(serializers.ModelSerializer):
@@ -27,6 +28,18 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = '__all__'
 
+
+#Product Tag Serializer
+class ProductTagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductTag
+        fields = '__all__'
+        
+#Review Serializer
+class ReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Review
+        fields = '__all__'
 #Order Serializer
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
